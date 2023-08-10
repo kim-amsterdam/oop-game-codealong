@@ -1,7 +1,6 @@
 /************ MAKING THE PLAYER CLASS ************/
 class Player {
   constructor() {
-    console.log("inside the constructor");
     this.positionX = 50;
     this.positionY = 0;
     this.width = 20;
@@ -25,13 +24,10 @@ class Player {
   moveLeft() {
     this.positionX--;
     this.domElement.style.left = this.positionX + "vw";
-
-    console.log(`moving left...${this.positionX}`);
   }
   moveRight() {
     this.positionX++;
     this.domElement.style.left = this.positionX + "vw";
-    console.log(`moving right...${this.positionX}`);
   }
 }
 
@@ -61,8 +57,6 @@ class Obstacle {
   moveDown() {
     this.positionY -= 1;
     this.domElement.style.bottom = this.positionY + "vw";
-
-    console.log("moving down...");
   }
 }
 
@@ -73,15 +67,23 @@ const obstaclesArr = []; // will store instances of the class Obstacle
 setInterval(() => {
   const newObstacle = new Obstacle();
   obstaclesArr.push(newObstacle);
-  console.log("this is a new obstacle");
-}, 3000);
+}, 5000);
 
-/************ MAKING THE OBSTACLES MOVE ************/
+/************ MAKING THE OBSTACLES MOVE & DETECT COLLISION ************/
 setInterval(() => {
   obstaclesArr.forEach((obstacleInstance) => {
     obstacleInstance.moveDown();
+    if (
+        player.positionX < obstacleInstance.positionX + obstacleInstance.width &&
+        player.positionX + player.width > obstacleInstance.positionX &&
+        player.positionY < obstacleInstance.positionY + obstacleInstance.height &&
+        player.positionY + player.height > obstacleInstance.positionY
+    ) {
+        console.log("Game over my fren!");
+        location.href = "./gameover.html"
+    }
   });
-}, 50);
+}, 50); 
 
 //detecting + invoking when pressed left or right key
 document.addEventListener("keydown", (event) => {

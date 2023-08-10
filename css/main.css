@@ -20,3 +20,8 @@ body {
     background-color: rgb(64, 117, 99);
     position: absolute;
 }
+
+#page-gameover {
+    text-align: center;
+    background-color: rgb(166, 161, 171);
+}
