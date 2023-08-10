@@ -1,6 +1,8 @@
 body {
   margin: 0;
   padding: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 #board {
@@ -12,4 +14,9 @@ body {
 #player {
   background-color: rgb(196, 96, 113);
   position: absolute;
+}
+
+.obstacle {
+    background-color: rgb(64, 117, 99);
+    position: absolute;
 }

@@ -1,3 +1,4 @@
+/************ MAKING THE PLAYER CLASS ************/
 class Player {
   constructor() {
     console.log("inside the constructor");
@@ -5,7 +6,7 @@ class Player {
     this.positionY = 0;
     this.width = 20;
     this.height = 10;
-    this.domElement = null;     
+    this.domElement = null;
 
     this.createDomElement();
   }
@@ -32,10 +33,55 @@ class Player {
     this.domElement.style.left = this.positionX + "vw";
     console.log(`moving right...${this.positionX}`);
   }
-  displayAmount() {}
+}
+
+/************ MAKING THE OBSTACLES CLASS ************/
+class Obstacle {
+  constructor() {
+    this.positionX = 50;
+    this.positionY = 100;
+    this.width = 20;
+    this.height = 10;
+    this.domElement = null;
+
+    this.createDomElement();
+  }
+  createDomElement() {
+    this.domElement = document.createElement("div");
+
+    this.domElement.className = "obstacle";
+    this.domElement.style.width = this.width + "vw";
+    this.domElement.style.height = this.height + "vh";
+    this.domElement.style.left = this.positionX + "vw";
+    this.domElement.style.bottom = this.positionY + "vh";
+
+    const parentElm = document.getElementById("board");
+    parentElm.appendChild(this.domElement);
+  }
+  moveDown() {
+    this.positionY -= 1;
+    this.domElement.style.bottom = this.positionY + "vw";
+
+    console.log("moving down...");
+  }
 }
 
 const player = new Player(); //every time you make a new Player, you invoke the class
+const obstaclesArr = []; // will store instances of the class Obstacle
+
+/************ CREATES THE OBSTACLES ************/
+setInterval(() => {
+  const newObstacle = new Obstacle();
+  obstaclesArr.push(newObstacle);
+  console.log("this is a new obstacle");
+}, 3000);
+
+/************ MAKING THE OBSTACLES MOVE ************/
+setInterval(() => {
+  obstaclesArr.forEach((obstacleInstance) => {
+    obstacleInstance.moveDown();
+  });
+}, 50);
 
 //detecting + invoking when pressed left or right key
 document.addEventListener("keydown", (event) => {
