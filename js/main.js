@@ -1,12 +1,12 @@
 /************ MAKING THE PLAYER CLASS ************/
 class Player {
   constructor() {
-    this.positionX = 50;
-    this.positionY = 0;
     this.width = 20;
     this.height = 10;
+    this.positionX = 50 - (this.width / 2);
+    this.positionY = 0;
     this.domElement = null;
-
+console.log(this.positionX)
     this.createDomElement();
   }
   createDomElement() {
@@ -34,10 +34,10 @@ class Player {
 /************ MAKING THE OBSTACLES CLASS ************/
 class Obstacle {
   constructor() {
-    this.positionX = 50;
-    this.positionY = 100;
     this.width = 20;
     this.height = 10;
+    this.positionX = 50;
+    this.positionY = 100;
     this.domElement = null;
 
     this.createDomElement();
